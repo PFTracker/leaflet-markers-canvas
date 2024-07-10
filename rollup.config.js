@@ -1,4 +1,4 @@
-import { uglify } from "rollup-plugin-uglify";
+import terser from '@rollup/plugin-terser';
 
 export default {
   input: "src/leaflet-markers-canvas.js",
@@ -10,7 +10,7 @@ export default {
     {
       file: "dist/leaflet-markers-canvas.min.js",
       format: "umd",
-      plugins: [uglify()],
+      plugins: [terser()],
     },
   ],
   plugins: [],
