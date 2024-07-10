@@ -66,8 +66,8 @@
     //
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
-    addMarker(marker) {
-      const { markerBox, positionBox, isVisible } = this._addMarker(marker);
+    addMarker(marker, redraw = true) {
+      const { markerBox, positionBox, isVisible } = this._addMarker(marker, redraw);
 
       if (markerBox && isVisible) {
         this._markersTree.insert(markerBox);
@@ -79,12 +79,12 @@
     },
 
     // add multiple markers (better for rBush performance)
-    addMarkers(markers) {
+    addMarkers(markers, redraw = true) {
       const markerBoxes = [];
       const positionBoxes = [];
 
       markers.forEach((marker) => {
-        const { markerBox, positionBox, isVisible } = this._addMarker(marker);
+        const { markerBox, positionBox, isVisible } = this._addMarker(marker, redraw);
 
         if (markerBox && isVisible) {
           markerBoxes.push(markerBox);
@@ -227,7 +227,7 @@
     //
     // * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
-    _addMarker(marker) {
+    _addMarker(marker, redraw = true) {
       if (marker.options.pane !== "markerPane" || !marker.options.icon) {
         console.error("This is not a marker", marker);
 
@@ -261,7 +261,7 @@
         marker,
       };
 
-      if (isVisible) {
+      if (isVisible && redraw) {
         this._drawMarker(marker, { x, y });
       }
 
