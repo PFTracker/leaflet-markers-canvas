@@ -96,7 +96,7 @@ const markersCanvas = {
     this._positionsTree.load(positionBoxes);
   },
 
-  removeMarker(marker) {
+  removeMarker(marker, redraw = true) {
     const latLng = marker.getLatLng();
     const isVisible = this._map.getBounds().contains(latLng);
 
@@ -112,13 +112,13 @@ const markersCanvas = {
       return a.marker._leaflet_id === b.marker._leaflet_id;
     });
 
-    if (isVisible) {
+    if (isVisible && redraw) {
       this._redraw(true);
     }
   },
 
   // remove multiple markers (better for rBush performance)
-  removeMarkers(markers) {
+  removeMarkers(markers, redraw = true) {
     let hasChanged = false;
 
     markers.forEach((marker) => {
@@ -137,7 +137,7 @@ const markersCanvas = {
         return a.marker._leaflet_id === b.marker._leaflet_id;
       });
 
-      if (isVisible) {
+      if (isVisible && redraw) {
         hasChanged = true;
       }
     });
