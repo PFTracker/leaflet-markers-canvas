@@ -1,4 +1,3 @@
-import buble from "@rollup/plugin-buble";
 import { uglify } from "rollup-plugin-uglify";
 
 export default {
@@ -14,6 +13,6 @@ export default {
       plugins: [uglify()],
     },
   ],
-  plugins: [buble()],
+  plugins: [],
   external: ["rbush", "leaflet"],
 };
