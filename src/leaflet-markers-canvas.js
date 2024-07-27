@@ -318,6 +318,7 @@ const markersCanvas = {
   },
 
   _redraw(clear) {
+    console.log("Redraw", clear)
     if (clear) {
       this._context.clearRect(0, 0, this._canvas.width, this._canvas.height);
     }
